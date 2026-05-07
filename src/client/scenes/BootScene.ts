@@ -32,7 +32,10 @@ export class BootScene extends Phaser.Scene {
     this.load.image('desert-tiles', 'assets/tilesets/DesertMapTileSheet.png');
     this.load.image('graveyard-tiles', 'assets/tilesets/GraveyardMapTileSheet.png');
 
-    // Sprite + audio loads added in T20, T21, T26, T27, T28 as each is needed.
+    // Sprite atlases (PNG + JSON; T12 migrated them as Phaser-compatible atlases)
+    this.load.atlas('hero', 'assets/sprites/Hero.png', 'assets/sprites/Hero.json');
+    this.load.atlas('bullet', 'assets/sprites/Bala.png', 'assets/sprites/Bala.json');
+    // More sprite atlases added in T21, T26, T27 as needed.
   }
 
   create() {
