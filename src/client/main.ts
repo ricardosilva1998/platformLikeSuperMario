@@ -1,20 +1,6 @@
 import Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, GRAVITY_Y } from './types';
-
-class HelloScene extends Phaser.Scene {
-  constructor() {
-    super('HelloScene');
-  }
-  create() {
-    this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'Loading…', {
-        fontFamily: 'monospace',
-        fontSize: '32px',
-        color: '#ffffff',
-      })
-      .setOrigin(0.5);
-  }
-}
+import { BootScene } from './scenes/BootScene';
 
 new Phaser.Game({
   type: Phaser.AUTO,
@@ -26,5 +12,5 @@ new Phaser.Game({
     default: 'arcade',
     arcade: { gravity: { x: 0, y: GRAVITY_Y }, debug: false },
   },
-  scene: [HelloScene],
+  scene: [BootScene /* MenuScene added next task */],
 });
