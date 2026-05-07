@@ -36,6 +36,7 @@ export class BootScene extends Phaser.Scene {
     this.load.atlas('hero', 'assets/sprites/Hero.png', 'assets/sprites/Hero.json');
     this.load.atlas('bullet', 'assets/sprites/Bala.png', 'assets/sprites/Bala.json');
     this.load.atlas('zombie', 'assets/sprites/ZombieBoy.png', 'assets/sprites/ZombieBoy.json');
+    this.load.atlas('cowgirl', 'assets/sprites/CowGirl.png', 'assets/sprites/CowGirl.json');
     // More sprite atlases added in T21, T26, T27 as needed.
   }
 

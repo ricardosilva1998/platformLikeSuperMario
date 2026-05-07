@@ -3,6 +3,7 @@ import { GAME_WIDTH, GAME_HEIGHT, GRAVITY_Y } from './types';
 import { BootScene } from './scenes/BootScene';
 import { MenuScene } from './scenes/MenuScene';
 import { ForestScene } from './scenes/ForestScene';
+import { DesertScene } from './scenes/DesertScene';
 import { HUDScene } from './scenes/HUDScene';
 import { GameOverScene } from './scenes/GameOverScene';
 
@@ -13,5 +14,5 @@ new Phaser.Game({
   height: GAME_HEIGHT,
   pixelArt: true,
   physics: { default: 'arcade', arcade: { gravity: { x: 0, y: GRAVITY_Y }, debug: false } },
-  scene: [BootScene, MenuScene, ForestScene, HUDScene, GameOverScene],
+  scene: [BootScene, MenuScene, ForestScene, DesertScene, HUDScene, GameOverScene],
 });
