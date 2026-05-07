@@ -3,12 +3,8 @@ import { GAME_WIDTH, GAME_HEIGHT, GRAVITY_Y } from './types';
 import { BootScene } from './scenes/BootScene';
 import { MenuScene } from './scenes/MenuScene';
 import { ForestScene } from './scenes/ForestScene';
+import { HUDScene } from './scenes/HUDScene';
 
-class HUDScene extends Phaser.Scene {
-  constructor() {
-    super('HUDScene');
-  }
-}
 class GameOverScene extends Phaser.Scene {
   constructor() {
     super('GameOverScene');
