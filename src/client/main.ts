@@ -4,6 +4,7 @@ import { BootScene } from './scenes/BootScene';
 import { MenuScene } from './scenes/MenuScene';
 import { ForestScene } from './scenes/ForestScene';
 import { DesertScene } from './scenes/DesertScene';
+import { GraveyardScene } from './scenes/GraveyardScene';
 import { HUDScene } from './scenes/HUDScene';
 import { GameOverScene } from './scenes/GameOverScene';
 
@@ -14,5 +15,5 @@ new Phaser.Game({
   height: GAME_HEIGHT,
   pixelArt: true,
   physics: { default: 'arcade', arcade: { gravity: { x: 0, y: GRAVITY_Y }, debug: false } },
-  scene: [BootScene, MenuScene, ForestScene, DesertScene, HUDScene, GameOverScene],
+  scene: [BootScene, MenuScene, ForestScene, DesertScene, GraveyardScene, HUDScene, GameOverScene],
 });
