@@ -1,11 +1,13 @@
 import Phaser from 'phaser';
 import { LevelScene, type LevelConfig } from './LevelScene';
 import { Hero } from '../entities/Hero';
+import { Zombie } from '../entities/enemies/Zombie';
 import { createInput } from '../systems/input';
 
 export class ForestScene extends LevelScene {
   protected hero!: Hero;
   protected inputSampler!: ReturnType<typeof createInput>;
+  private zombies!: Phaser.Physics.Arcade.Group;
 
   constructor() {
     super('ForestScene');
@@ -31,6 +33,17 @@ export class ForestScene extends LevelScene {
     this.physics.add.collider(this.hero.bullets, this.groundLayer, (b) =>
       (b as Phaser.GameObjects.GameObject).destroy(),
     );
+
+    this.zombies = this.physics.add.group({ classType: Zombie, runChildUpdate: true });
+    this.zombies.add(new Zombie(this, 400, this.map.heightInPixels - 100));
+    this.zombies.add(new Zombie(this, 700, this.map.heightInPixels - 100));
+
+    this.physics.add.collider(this.zombies, this.groundLayer);
+    this.physics.add.collider(this.hero.bullets, this.zombies, (bullet, zombie) => {
+      (bullet as Phaser.GameObjects.GameObject).destroy();
+      (zombie as Phaser.GameObjects.GameObject).destroy();
+    });
+    this.physics.add.collider(this.hero, this.zombies, () => this.onHeroDeath());
 
     this.cameras.main.startFollow(this.hero, true, 0.1, 0.1);
 
