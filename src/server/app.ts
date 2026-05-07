@@ -17,7 +17,7 @@ export function createApp() {
   app.use('/api/scores', scoresRouter);
 
   if (env.NODE_ENV === 'production') {
-    const clientDist = path.resolve(__dirname, '../client');
+    const clientDist = path.resolve(__dirname, '../../client');
     app.use(express.static(clientDist));
     app.get('*', (_req, res) => {
       res.sendFile(path.join(clientDist, 'index.html'));
