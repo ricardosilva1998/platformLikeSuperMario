@@ -6,3 +6,6 @@ dist/
 .DS_Store
 playwright-report/
 test-results/
+
+# Audio source files (raw WAVs/FLAC) — too large; only normalized .mp3/.ogg are tracked
+public/assets/audio/source/
