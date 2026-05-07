@@ -1,0 +1,9 @@
+# Exclude from Railway uploads (not needed at build/runtime)
+legacy/
+docs/
+.git/
+node_modules/
+dist/
+playwright-report/
+test-results/
+public/assets/audio/source/
