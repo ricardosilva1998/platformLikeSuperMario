@@ -62,3 +62,29 @@ describe('GET /api/scores', () => {
     expect(res.status).toBe(400);
   });
 });
+
+describe('POST /api/scores', () => {
+  it('inserts a valid score and returns the row', async () => {
+    const res = await request(app)
+      .post('/api/scores')
+      .send({ playerName: 'rik', level: 'forest', timeMs: 12345, score: 99 });
+    expect(res.status).toBe(201);
+    expect(res.body.playerName).toBe('RIK');
+    expect(res.body.id).toBeTypeOf('number');
+  });
+
+  it('rejects invalid body with 400', async () => {
+    const res = await request(app)
+      .post('/api/scores')
+      .send({ playerName: 'rik', level: 'volcano', timeMs: 1, score: 1 });
+    expect(res.status).toBe(400);
+  });
+
+  it('strips unknown fields silently', async () => {
+    const res = await request(app)
+      .post('/api/scores')
+      .send({ playerName: 'rik', level: 'forest', timeMs: 1, score: 1, ghost: true });
+    expect(res.status).toBe(201);
+    expect(res.body.ghost).toBeUndefined();
+  });
+});

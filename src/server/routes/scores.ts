@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { desc, eq } from 'drizzle-orm';
 import { db } from '../db/client.js';
 import { scores } from '../db/schema.js';
-import { LevelEnum } from '../../shared/score.schema.js';
+import { LevelEnum, ScoreSubmissionSchema } from '../../shared/score.schema.js';
 
 export const scoresRouter = Router();
 
@@ -27,6 +27,19 @@ scoresRouter.get('/', async (req, res, next) => {
     });
 
     res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
+scoresRouter.post('/', async (req, res, next) => {
+  try {
+    const parsed = ScoreSubmissionSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: parsed.error.flatten() });
+    }
+    const [row] = await db.insert(scores).values(parsed.data).returning();
+    res.status(201).json(row);
   } catch (err) {
     next(err);
   }
