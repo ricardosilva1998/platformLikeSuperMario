@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import { desc, eq } from 'drizzle-orm';
 import { db } from '../db/client.js';
@@ -32,7 +33,14 @@ scoresRouter.get('/', async (req, res, next) => {
   }
 });
 
-scoresRouter.post('/', async (req, res, next) => {
+export const postLimiter = rateLimit({
+  windowMs: 60_000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+scoresRouter.post('/', postLimiter, async (req, res, next) => {
   try {
     const parsed = ScoreSubmissionSchema.safeParse(req.body);
     if (!parsed.success) {

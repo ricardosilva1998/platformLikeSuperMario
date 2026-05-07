@@ -3,6 +3,7 @@ import request from 'supertest';
 import { createApp } from '../../src/server/app.js';
 import { db, pool } from '../../src/server/db/client.js';
 import { scores } from '../../src/server/db/schema.js';
+import { postLimiter } from '../../src/server/routes/scores.js';
 
 const app = createApp();
 
@@ -86,5 +87,23 @@ describe('POST /api/scores', () => {
       .send({ playerName: 'rik', level: 'forest', timeMs: 1, score: 1, ghost: true });
     expect(res.status).toBe(201);
     expect(res.body.ghost).toBeUndefined();
+  });
+});
+
+describe('POST /api/scores rate limit', () => {
+  beforeEach(() => {
+    postLimiter.resetKey('::ffff:127.0.0.1');
+    postLimiter.resetKey('127.0.0.1');
+    postLimiter.resetKey('::1');
+  });
+
+  it('rate-limits after 10 requests in a minute', async () => {
+    const body = { playerName: 'A', level: 'forest', timeMs: 1, score: 1 };
+    for (let i = 0; i < 10; i++) {
+      const res = await request(app).post('/api/scores').send(body);
+      expect(res.status).toBe(201);
+    }
+    const blocked = await request(app).post('/api/scores').send(body);
+    expect(blocked.status).toBe(429);
   });
 });
