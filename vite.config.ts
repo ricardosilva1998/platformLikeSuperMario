@@ -2,10 +2,8 @@ import { defineConfig } from 'vite';
 import path from 'node:path';
 
 export default defineConfig({
-  root: 'public',
-  publicDir: 'assets',
   build: {
-    outDir: '../dist/client',
+    outDir: 'dist/client',
     emptyOutDir: true,
   },
   server: {
