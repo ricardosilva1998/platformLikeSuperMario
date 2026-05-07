@@ -3,11 +3,13 @@ import { LevelScene, type LevelConfig } from './LevelScene';
 import { Hero } from '../entities/Hero';
 import { Zombie } from '../entities/enemies/Zombie';
 import { createInput } from '../systems/input';
+import { Audio } from '../systems/audio';
 
 export class ForestScene extends LevelScene {
   protected hero!: Hero;
   protected inputSampler!: ReturnType<typeof createInput>;
   private zombies!: Phaser.Physics.Arcade.Group;
+  private audio!: Audio;
 
   constructor() {
     super('ForestScene');
@@ -25,6 +27,9 @@ export class ForestScene extends LevelScene {
 
   create() {
     super.create();
+
+    this.audio = new Audio(this);
+    this.audio.playMusic('music-forest');
 
     this.inputSampler = createInput(this);
 

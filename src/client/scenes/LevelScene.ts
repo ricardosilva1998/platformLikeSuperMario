@@ -49,6 +49,7 @@ export abstract class LevelScene extends Phaser.Scene {
 
   protected onLevelWin() {
     const elapsed = Math.round(this.time.now - this.startedAt);
+    this.sound.play('sfx-win', { volume: 0.6 });
     this.scene.stop('HUDScene');
     this.scene.start('GameOverScene', {
       result: 'win',
@@ -59,6 +60,7 @@ export abstract class LevelScene extends Phaser.Scene {
   }
 
   protected onHeroDeath() {
+    this.sound.play('sfx-lose', { volume: 0.6 });
     this.scene.stop('HUDScene');
     this.scene.start('GameOverScene', { result: 'lose', levelKey: this.config.levelKey });
   }

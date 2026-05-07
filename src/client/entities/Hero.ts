@@ -37,5 +37,6 @@ export class Hero extends Phaser.Physics.Arcade.Sprite {
   shoot() {
     const dir: -1 | 1 = this.flipX ? -1 : 1;
     this.bullets.add(new Bullet(this.scene, this.x + dir * 16, this.y, dir));
+    this.scene.sound.play('sfx-shoot', { volume: 0.4 });
   }
 }

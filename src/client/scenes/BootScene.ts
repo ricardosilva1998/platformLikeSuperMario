@@ -39,6 +39,20 @@ export class BootScene extends Phaser.Scene {
     this.load.atlas('cowgirl', 'assets/sprites/CowGirl.png', 'assets/sprites/CowGirl.json');
     this.load.atlas('ninja', 'assets/sprites/NinjaBoy.png', 'assets/sprites/NinjaBoy.json');
     // More sprite atlases added in T21, T26, T27 as needed.
+
+    // Audio (T28): per-level music + global SFX
+    const audioPairs: [string, string][] = [
+      ['music-forest', 'forest-at-dawn'],
+      ['music-desert', 'western-themetune'],
+      ['music-graveyard', 'scary-background-4'],
+      ['sfx-shoot', 'laser-one-shot-2'],
+      ['sfx-hit', 'zombie-attack'],
+      ['sfx-win', 'you-win'],
+      ['sfx-lose', 'you-lose-evil'],
+    ];
+    for (const [key, file] of audioPairs) {
+      this.load.audio(key, [`assets/audio/${file}.mp3`, `assets/audio/${file}.ogg`]);
+    }
   }
 
   create() {

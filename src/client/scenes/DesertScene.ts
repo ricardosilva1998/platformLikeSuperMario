@@ -3,11 +3,13 @@ import { LevelScene, type LevelConfig } from './LevelScene';
 import { Hero } from '../entities/Hero';
 import { CowGirl } from '../entities/enemies/CowGirl';
 import { createInput } from '../systems/input';
+import { Audio } from '../systems/audio';
 
 export class DesertScene extends LevelScene {
   private hero!: Hero;
   private inputSampler!: ReturnType<typeof createInput>;
   private enemies!: Phaser.Physics.Arcade.Group;
+  private audio!: Audio;
 
   constructor() {
     super('DesertScene');
@@ -25,6 +27,10 @@ export class DesertScene extends LevelScene {
 
   create() {
     super.create();
+
+    this.audio = new Audio(this);
+    this.audio.playMusic('music-desert');
+
     this.inputSampler = createInput(this);
 
     this.hero = new Hero(this, 64, this.map.heightInPixels - 100);

@@ -4,12 +4,14 @@ import { Hero } from '../entities/Hero';
 import { Ninja } from '../entities/enemies/Ninja';
 import { Fire } from '../entities/Fire';
 import { createInput } from '../systems/input';
+import { Audio } from '../systems/audio';
 
 export class GraveyardScene extends LevelScene {
   private hero!: Hero;
   private inputSampler!: ReturnType<typeof createInput>;
   private enemies!: Phaser.Physics.Arcade.Group;
   private fires!: Phaser.Physics.Arcade.StaticGroup;
+  private audio!: Audio;
 
   constructor() {
     super('GraveyardScene');
@@ -27,6 +29,10 @@ export class GraveyardScene extends LevelScene {
 
   create() {
     super.create();
+
+    this.audio = new Audio(this);
+    this.audio.playMusic('music-graveyard');
+
     this.inputSampler = createInput(this);
 
     this.hero = new Hero(this, 64, this.map.heightInPixels - 100);
