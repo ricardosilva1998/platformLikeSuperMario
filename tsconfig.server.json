@@ -8,7 +8,11 @@
     "lib": ["ES2022"],
     "types": ["node"],
     "declaration": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["src/shared/*"]
+    }
   },
   "include": ["src/server", "src/shared"]
 }
