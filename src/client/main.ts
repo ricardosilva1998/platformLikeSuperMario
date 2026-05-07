@@ -4,20 +4,7 @@ import { BootScene } from './scenes/BootScene';
 import { MenuScene } from './scenes/MenuScene';
 import { ForestScene } from './scenes/ForestScene';
 import { HUDScene } from './scenes/HUDScene';
-
-class GameOverScene extends Phaser.Scene {
-  constructor() {
-    super('GameOverScene');
-  }
-  create(data: { result?: string }) {
-    this.add
-      .text(400, 240, `${(data.result ?? '?').toUpperCase()}!`, {
-        fontSize: '48px',
-        color: '#fff',
-      })
-      .setOrigin(0.5);
-  }
-}
+import { GameOverScene } from './scenes/GameOverScene';
 
 new Phaser.Game({
   type: Phaser.AUTO,
