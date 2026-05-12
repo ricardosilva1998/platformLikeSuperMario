@@ -13,30 +13,33 @@ export class MenuScene extends Phaser.Scene {
   }
 
   create() {
+    const cx = GAME_WIDTH / 2;
+    const cy = GAME_HEIGHT / 2;
+
     this.add
-      .text(GAME_WIDTH / 2, 80, 'SUPER MARIO', {
+      .text(cx, cy - 280, 'SUPER MARIO', {
         fontFamily: 'monospace',
-        fontSize: '48px',
+        fontSize: '96px',
         color: '#ffcc00',
       })
       .setOrigin(0.5);
 
     this.add
-      .text(GAME_WIDTH / 2, 130, '— Select a level —', {
+      .text(cx, cy - 180, '— Select a level —', {
         fontFamily: 'monospace',
-        fontSize: '16px',
+        fontSize: '32px',
         color: '#aaaaaa',
       })
       .setOrigin(0.5);
 
     LEVELS.forEach((lv, idx) => {
       const txt = this.add
-        .text(GAME_WIDTH / 2, 200 + idx * 50, lv.label, {
+        .text(cx, cy - 60 + idx * 100, lv.label, {
           fontFamily: 'monospace',
-          fontSize: '24px',
+          fontSize: '48px',
           color: '#ffffff',
           backgroundColor: '#333333',
-          padding: { x: 16, y: 8 },
+          padding: { x: 32, y: 16 },
         })
         .setOrigin(0.5)
         .setInteractive({ useHandCursor: true });
@@ -49,11 +52,19 @@ export class MenuScene extends Phaser.Scene {
     });
 
     this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT - 20, 'Arrows / WASD to move · Space jump · Z shoot', {
+      .text(cx, GAME_HEIGHT - 40, 'Arrows / WASD to move · Space jump · Z shoot', {
         fontFamily: 'monospace',
-        fontSize: '12px',
+        fontSize: '24px',
         color: '#888888',
       })
       .setOrigin(0.5);
+
+    // Keyboard shortcuts: 1/2/3 → Forest/Desert/Graveyard
+    const codes = ['ONE', 'TWO', 'THREE'];
+    LEVELS.forEach((lv, idx) => {
+      this.input.keyboard?.on(`keydown-${codes[idx]}`, () => {
+        this.scene.start(lv.sceneKey, { levelKey: lv.key });
+      });
+    });
   }
 }

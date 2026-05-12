@@ -27,14 +27,14 @@ export class GameOverScene extends Phaser.Scene {
     const color = this.params.result === 'win' ? '#66ff66' : '#ff6666';
 
     this.add
-      .text(w / 2, 80, title, { fontFamily: 'monospace', fontSize: '48px', color })
+      .text(w / 2, 160, title, { fontFamily: 'monospace', fontSize: '96px', color })
       .setOrigin(0.5);
 
     if (this.params.result === 'win' && typeof this.params.timeMs === 'number') {
       this.add
-        .text(w / 2, 140, `Time: ${(this.params.timeMs / 1000).toFixed(2)}s`, {
+        .text(w / 2, 280, `Time: ${(this.params.timeMs / 1000).toFixed(2)}s`, {
           fontFamily: 'monospace',
-          fontSize: '20px',
+          fontSize: '40px',
           color: '#ffffff',
         })
         .setOrigin(0.5);
@@ -59,12 +59,12 @@ export class GameOverScene extends Phaser.Scene {
     }
 
     const replay = this.add
-      .text(w / 2, h - 60, 'Play again', {
+      .text(w / 2, h - 140, 'Play again', {
         fontFamily: 'monospace',
-        fontSize: '14px',
+        fontSize: '28px',
         color: '#66ff66',
         backgroundColor: '#222222',
-        padding: { x: 10, y: 4 },
+        padding: { x: 20, y: 8 },
       })
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true });
@@ -79,9 +79,9 @@ export class GameOverScene extends Phaser.Scene {
     });
 
     const menu = this.add
-      .text(w / 2, h - 30, 'Back to menu', {
+      .text(w / 2, h - 70, 'Back to menu', {
         fontFamily: 'monospace',
-        fontSize: '14px',
+        fontSize: '28px',
         color: '#aaaaaa',
       })
       .setOrigin(0.5)
@@ -102,9 +102,9 @@ export class GameOverScene extends Phaser.Scene {
     try {
       const rows = await getTopScores(this.params.levelKey, 10);
       this.add
-        .text(GAME_WIDTH / 2, 200, `TOP 10 — ${this.params.levelKey.toUpperCase()}`, {
+        .text(GAME_WIDTH / 2, 400, `TOP 10 — ${this.params.levelKey.toUpperCase()}`, {
           fontFamily: 'monospace',
-          fontSize: '18px',
+          fontSize: '36px',
           color: '#ffcc00',
         })
         .setOrigin(0.5);
@@ -112,19 +112,19 @@ export class GameOverScene extends Phaser.Scene {
         this.add
           .text(
             GAME_WIDTH / 2,
-            230 + i * 18,
+            460 + i * 36,
             `${String(i + 1).padStart(2)} ${r.playerName.padEnd(16)} ${(r.timeMs / 1000)
               .toFixed(2)
               .padStart(8)}s`,
-            { fontFamily: 'monospace', fontSize: '14px', color: '#ffffff' },
+            { fontFamily: 'monospace', fontSize: '28px', color: '#ffffff' },
           )
           .setOrigin(0.5);
       });
     } catch (err) {
       this.add
-        .text(GAME_WIDTH / 2, 230, '(leaderboard unavailable)', {
+        .text(GAME_WIDTH / 2, 460, '(leaderboard unavailable)', {
           fontFamily: 'monospace',
-          fontSize: '14px',
+          fontSize: '28px',
           color: '#888888',
         })
         .setOrigin(0.5);

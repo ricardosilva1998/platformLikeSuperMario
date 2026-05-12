@@ -10,14 +10,14 @@ export class BootScene extends Phaser.Scene {
     const w = GAME_WIDTH;
     const h = GAME_HEIGHT;
 
-    const bg = this.add.rectangle(w / 2, h / 2, 400, 24, 0x222222);
-    const bar = this.add.rectangle(w / 2 - 198, h / 2, 4, 20, 0x66ff66).setOrigin(0, 0.5);
-    this.load.on('progress', (p: number) => bar.setSize(396 * p, 20));
+    this.add.rectangle(w / 2, h / 2, 800, 48, 0x222222);
+    const bar = this.add.rectangle(w / 2 - 396, h / 2, 8, 40, 0x66ff66).setOrigin(0, 0.5);
+    this.load.on('progress', (p: number) => bar.setSize(792 * p, 40));
 
     this.add
-      .text(w / 2, h / 2 - 32, 'Super Mario — Loading', {
+      .text(w / 2, h / 2 - 64, 'Super Mario — Loading', {
         fontFamily: 'monospace',
-        fontSize: '20px',
+        fontSize: '40px',
         color: '#ffffff',
       })
       .setOrigin(0.5);

@@ -16,18 +16,18 @@ export class HUDScene extends Phaser.Scene {
   }
 
   create() {
-    this.timerText = this.add.text(8, 8, 'Time: 0.00', {
+    this.timerText = this.add.text(16, 16, 'Time: 0.00', {
       fontFamily: 'monospace',
-      fontSize: '16px',
+      fontSize: '32px',
       color: '#ffffff',
       backgroundColor: '#00000080',
-      padding: { x: 6, y: 2 },
+      padding: { x: 12, y: 4 },
     });
 
     this.add
-      .text(this.cameras.main.width - 8, 8, this.levelKey.toUpperCase(), {
+      .text(this.cameras.main.width - 16, 16, this.levelKey.toUpperCase(), {
         fontFamily: 'monospace',
-        fontSize: '16px',
+        fontSize: '32px',
         color: '#ffcc00',
       })
       .setOrigin(1, 0);
